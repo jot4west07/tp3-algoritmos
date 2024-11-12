@@ -158,6 +158,7 @@ else:
 # b. mostrar el año de aparición de Wolverine
 
 pos_wolverine = search(super_heroes,'nombre','Wolverine')
+# super_heroes[pos_wolverine] accede a la posicion donde esta wolverine y ['año_aparicion'] es la clave del año de aparicion 
 print("Año de aparicion de Wolverine:",super_heroes[pos_wolverine]['año_aparicion'])
 
 # c. cambiar la casa de Dr. Strange a Marvel
@@ -194,9 +195,9 @@ print("")
 pos_flash = search(super_heroes,'nombre','Flash')
 pos_star_lord = search(super_heroes,'nombre','Star-Lord')
 print("Informacion de Flash:")
-print(super_heroes[pos_flash])
+print(super_heroes[pos_flash]) # Printea todo en la posicion donde esta flash 
 print("Informacion de Star-Lord:")
-print(super_heroes[pos_star_lord])
+print(super_heroes[pos_star_lord]) # # Printea todo en la posicion donde esta star_lord 
 print("")
 
 # h. listar los superhéroes que comienzan con la letra B, M y S

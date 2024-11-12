@@ -170,7 +170,7 @@ pokemones = [
 lista_entrenadores = []
 for entrenador in entrenadores:
     entrenador.update({'sublist': []})
-    lista_entrenadores.append(entrenador)
+    lista_entrenadores.append(entrenador) # a lista_entrenadores que es una lista [] le agrega los entrenadores
 
 pos_pikachu = search(pokemones,'nombre','Pikachu')
 pos_jolteon = search(pokemones,'nombre','Jolteon')
@@ -198,6 +198,7 @@ pos_nidoking = search(pokemones,'nombre','Nidoking')
 
 pos_ash = search(lista_entrenadores, 'nombre', 'Ash Ketchum')
 if pos_ash is not None:
+    # agrega a ash su pokemon pikachu 
     lista_entrenadores[pos_ash]['sublist'].append(pokemones[pos_pikachu])
     lista_entrenadores[pos_ash]['sublist'].append(pokemones[pos_charizard])
     lista_entrenadores[pos_ash]['sublist'].append(pokemones[pos_bulbasaur])
@@ -244,6 +245,7 @@ if pos_leon is not None:
 
 # a. obtener la cantidad de Pokémons de un determinado entrenador: Ash
 posicion_ash = search(entrenadores,'nombre','Ash Ketchum')
+# la longitud de la sublist del entrenador es la cantidad de sus pokemones 
 cant_pokes_ash = len(lista_entrenadores[posicion_ash]['sublist'])
 print("La cantidad de pokemons de Ash es:", cant_pokes_ash)
 print("")
@@ -252,7 +254,7 @@ print("")
 print("Entrenadores con mas de 3 torneos ganados:")
 for entrenador in entrenadores:
     if entrenador["torneos_ganados"] > 3:
-        print(entrenador["nombre"]+" | ", end='')
+        print(entrenador["nombre"]+" | ", end='') # end='' no deja un salto de linea
 print("")
 print("")
 
@@ -260,12 +262,13 @@ print("")
 mas_torneos = 0
 
 for entrenador in entrenadores:
-    torneos_entrenador = entrenador["torneos_ganados"]
-    if torneos_entrenador > mas_torneos:
+    torneos_entrenador = entrenador["torneos_ganados"] # torneos_entrenador asume la cantidad de torneos ganados
+    if torneos_entrenador > mas_torneos: # Si el entrenador actual tiene mas torneos ganados, mas_torneos asume esa cantidad de torneos ganados de ese entrenador
         mas_torneos = torneos_entrenador
-    
+# entrenador1 es el entrenador con mas torneos ganados    
 entrenador1 = search(lista_entrenadores,'torneos_ganados',mas_torneos)
 nivel_mayor = 0
+# for que recorre la lista de pokemones del entrenador con mas torneos ganados
 for pokemons in lista_entrenadores[entrenador1]['sublist']:
     nivel_actual = pokemons['nivel']
     if nivel_actual > nivel_mayor:
@@ -321,7 +324,7 @@ for pokemons in lista_entrenadores[pos_ash]['sublist']:
     nivel = pokemons['nivel']
     suma_nivel = suma_nivel+nivel
 promedio_ash = suma_nivel/len(lista_entrenadores[pos_ash]['sublist'])
-promedio_ash_round = round(promedio_ash,2)
+promedio_ash_round = round(promedio_ash,2) # round(algo,2) el 2 indica cuantos nros despues de la coma
 print("El promedio de nivel de los pokemons de Ash es:", promedio_ash_round)
 
 for pokemons in lista_entrenadores[pos_leon]['sublist']:
@@ -337,29 +340,29 @@ lista_h = []
 for entrenador in lista_entrenadores:
     for pokemons in entrenador['sublist']:
         if pokemons['nombre'] == "Psyduck":
-            lista_h.append(entrenador['nombre'])
+            lista_h.append(entrenador['nombre']) # guarda en lista_h el nombre de los entrenadores
 print("Entrenadores que tienen a Psyduck:")
 for entrenador in lista_h:
     print(entrenador+" | ", end="")
 print("")
 print("")
 
-# i. mostrar los entrenadores que tienen Pokémons repetidos
+# i. mostrar los entrenadores que tienen Pokemones repetidos
 print("Entrenadores que tienen pokemons repetidos:")
 lista_pokemons = []
 lista_a_quitar = []
 
 for entrenador in lista_entrenadores:
     for pokemons in entrenador['sublist']:
-        lista_pokemons.append(pokemons['nombre'])
+        lista_pokemons.append(pokemons['nombre']) # guarda en lista_pokemons todos los pokemones de todos los entrenadores
     # set no repite los elementos en una lista, por eso si las longitudes son distintas significa
     # que hay pokemones repetidos 
-    if len(lista_pokemons) != len(set(lista_pokemons)):
+    if len(lista_pokemons) != len(set(lista_pokemons)): # significa que hay pokemons que se repiten
         lista_a_quitar = set(lista_pokemons) # set () devuelve una lista set: {x,y,z}
         quit_list = list(lista_a_quitar) # list() transforma el set a lista para usar indices []
         print(entrenador['nombre']+": ", end="")
         for i in range (len(quit_list)):
-            lista_pokemons.remove(quit_list[i])
+            lista_pokemons.remove(quit_list[i]) # a la lista_pokemons le deja solo los repetidos
         for pokemones in lista_pokemons:
             print(pokemones+" | ",end="")
         print("")
@@ -398,9 +401,9 @@ for entrenador in lista_entrenadores:
         for pokemones in entrenador['sublist']:
             lista_pokes.append(pokemones['nombre'])
         list_pokes = list(lista_pokes)
-        if name_pokemon in list_pokes:
-            index_trainer = search(lista_entrenadores,'nombre',name_entrenador)
-            index_poke = search(entrenador['sublist'],'nombre',name_pokemon)
+        if name_pokemon in list_pokes: # si el nombre del pokemon esta en list_pokes
+            index_trainer = search(lista_entrenadores,'nombre',name_entrenador) # indice del entrenador
+            index_poke = search(entrenador['sublist'],'nombre',name_pokemon) # indice del pokemon
             print("El entrenador",name_entrenador,"tiene al pokemon",name_pokemon)
             print(lista_entrenadores[index_trainer])
             print("")
